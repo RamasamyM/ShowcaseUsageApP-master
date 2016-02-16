@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Mutual Fund App</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="next">next</string>
+    <string name="title_single_shot">Welcome to the  Mutual  Fund App</string>
+    <string name="R_string_desc_single_shot">A mutual fund is a professionally managed investment fund that pools money from many investors to purchase securities</string>
+    <string name="text1">Ramasamy M</string>
+    <string name="text2">Ramasamy@hexagonglobal.in</string>
+</resources>
