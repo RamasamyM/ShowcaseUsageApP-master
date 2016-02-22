@@ -45,6 +45,7 @@
                 android:layout_centerVertical="true"
                 android:textSize="@dimen/info_text_size"
                 android:layout_marginRight="16dp"
+                android:text="Welcome to the cardview click me!"
                 android:layout_toRightOf="@id/imageview_icon"
                 android:textColor="@android:color/black"/>
         </RelativeLayout>

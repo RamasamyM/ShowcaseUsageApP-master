@@ -39,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:textSize="@dimen/info_text_size"
+                android:text="welcome to the card view "
                 android:layout_marginRight="16dp"
                 android:layout_toRightOf="@id/imageview_icon"
                 android:textColor="@android:color/black"/>

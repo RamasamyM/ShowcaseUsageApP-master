@@ -20,11 +20,15 @@ import com.github.amlcurran.showcaseview.ShowcaseView;
 
 import co.mobiwise.materialintro.shape.Focus;
 import co.mobiwise.materialintro.shape.FocusGravity;
-import co.mobiwise.materialintro.view.MaterialIntroView;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener{
     private static final String TAG = "Mainactivity";
+
+
+    private static final String FAB1 = "action_one";
+    private static final String FAB2 = "action_two";
+    private static final String FAB3 = "action_three";
     private ShowcaseView showcaseView;
     private int counter = 0;
     private FloatingActionButton mainFab, chartFab, emptyFab;
@@ -34,7 +38,6 @@ public class MainActivity extends AppCompatActivity
     private static final String SHOWCASEVIEW  = "showcase";
     private Boolean isFabOpen = true;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,32 +46,26 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setToolbar(toolbar, SHOWCASEVIEW, "Welcome to the ToolBar click me! ");
+
         mainFab = (FloatingActionButton) findViewById(R.id.main_fab_button);
         chartFab = (FloatingActionButton) findViewById(R.id.piechart_fab_button);
         emptyFab= (FloatingActionButton)findViewById(R.id.empty_fab_button);
+        mainFab.setOnClickListener(this);
+        chartFab.setOnClickListener(this);
+        emptyFab.setOnClickListener(this);
+        setFloatingActionButton(mainFab, SHOWCASEVIEW,"Welcome to the mainFab click me! ");
         fab_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
         fab_close = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close);
         rotate_forward = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_forward);
         rotate_backward = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_backward);
-        mainFab.setOnClickListener(this);
-        setFloatingActionButton(mainFab, SHOWCASEVIEW, "Welcome to the MainFAB click me! ");
-        chartFab.setOnClickListener(this);
-
-        emptyFab.setOnClickListener(this);
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
-
         toggle.syncState();
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-      /*  initUI();
-        showcaseUtils();*/
-
     }
 
     @Override
@@ -110,38 +107,27 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_gallery) {
             startActivity(new Intent(getApplication(), SecondActivity.class));
-
-        } else if (id == R.id.nav_send) {
+        }
+        else if (id == R.id.nav_send)
+        {
 
         }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-   /* private void initUI() {
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-    }
-
-    *//**
-     * Showcase view
-     *//*
-    private void showcaseUtils() {
-        showcaseView = new ShowcaseView.Builder(this).setTarget(new ViewTarget(navigationView))
-                .setContentTitle("Title").setContentText("Description").setOnClickListener(this).build();
-        showcaseView.setButtonText("okay");
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (showcaseView != null) {
-            showcaseView.hide();
-        }
+   /* @Override
+    public void onUserClicked(String viewId) {
+        if(viewId == FAB1)
+            setFloatingActionButton(chartFab,FAB2,"second FAB Button");
+        if(viewId == FAB2)
+            setFloatingActionButton(emptyFab,FAB3,"third FAB Button");
     }*/
 
     private void setFloatingActionButton(FloatingActionButton view, String usageId, String text)
     {
-        new MaterialIntroView.Builder(this)
+        new CustomClassView.Builder(this)
                 .enableDotAnimation(true)
                 .setFocusGravity(FocusGravity.CENTER)
                 .setFocusType(Focus.ALL)
@@ -155,7 +141,7 @@ public class MainActivity extends AppCompatActivity
     }
     private void setToolbar(View view, String usageId, String text)
     {
-        new MaterialIntroView.Builder(this)
+        new CustomClassView.Builder(this)
                 .enableDotAnimation(true)
                 .setFocusGravity(FocusGravity.LEFT)
                 .setFocusType(Focus.MINIMUM)
@@ -179,12 +165,11 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.piechart_fab_button:
                 intent = new Intent(this,SecondActivity.class);
-                setFloatingActionButton(chartFab, SHOWCASEVIEW, "Welcome to the pieChart click me! ");
                 Log.i(TAG, "pie chart activity call ");
                 break;
             case R.id.empty_fab_button:
                 intent= new Intent(this, SipActivity.class);
-                setFloatingActionButton(emptyFab, SHOWCASEVIEW, "Welcome to the cardView click me!");
+                Log.i(TAG, "empty chart activity call ");
             default:
                 break;
         }
@@ -197,7 +182,6 @@ public class MainActivity extends AppCompatActivity
             mainFab.startAnimation(rotate_backward);
             chartFab.startAnimation(fab_close);
             emptyFab.startAnimation(fab_close);
-
             chartFab.setClickable(false);
             emptyFab.setClickable(false);
             isFabOpen= false;
@@ -208,7 +192,6 @@ public class MainActivity extends AppCompatActivity
             mainFab.startAnimation(rotate_forward);
             chartFab.startAnimation(fab_open);
             emptyFab.startAnimation(fab_open);
-
             emptyFab.setClickable(true);
             chartFab.setClickable(true);
             isFabOpen = true;
