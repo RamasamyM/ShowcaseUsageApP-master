@@ -19,6 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".SecondActivity"></activity>
+        <activity android:name=".SipActivity"></activity>
+
     </application>
 
 </manifest>

@@ -22,6 +22,18 @@
     </android.support.design.widget.AppBarLayout>
 
   <!--  <include layout="@layout/content_main" />-->
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/empty_fab_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="160dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="@dimen/fab_margin"
+        android:visibility="invisible"
+        app:backgroundTint="#00FF00"
+        app:elevation="6dp"
+        app:pressedTranslationZ="12dp"
+        android:src="@drawable/hand" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/piechart_fab_button"
@@ -37,15 +49,6 @@
         android:src="@drawable/fb3" />
 
 
-   <!-- <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:background="#2E7D32"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/fb1" />
--->
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/main_fab_button"

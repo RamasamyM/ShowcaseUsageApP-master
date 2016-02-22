@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity
     private static final String TAG = "Mainactivity";
     private ShowcaseView showcaseView;
     private int counter = 0;
-    private FloatingActionButton mainFab, chartFab;
+    private FloatingActionButton mainFab, chartFab, emptyFab;
     private Animation fab_open, fab_close, rotate_forward, rotate_backward;
     private NavigationView navigationView;
     private Toolbar toolbar;
@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity
         setToolbar(toolbar, SHOWCASEVIEW, "Welcome to the ToolBar click me! ");
         mainFab = (FloatingActionButton) findViewById(R.id.main_fab_button);
         chartFab = (FloatingActionButton) findViewById(R.id.piechart_fab_button);
+        emptyFab= (FloatingActionButton)findViewById(R.id.empty_fab_button);
         fab_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
         fab_close = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close);
         rotate_forward = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_forward);
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity
         mainFab.setOnClickListener(this);
         setFloatingActionButton(mainFab, SHOWCASEVIEW, "Welcome to the MainFAB click me! ");
         chartFab.setOnClickListener(this);
+        emptyFab.setOnClickListener(this);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -178,6 +180,8 @@ public class MainActivity extends AppCompatActivity
                 intent = new Intent(this,SecondActivity.class);
                 Log.i(TAG, "pie chart activity call ");
                 break;
+            case R.id.empty_fab_button:
+                intent= new Intent(this, SipActivity.class);
             default:
                 break;
         }
@@ -189,7 +193,10 @@ public class MainActivity extends AppCompatActivity
         if (isFabOpen) {
             mainFab.startAnimation(rotate_backward);
             chartFab.startAnimation(fab_close);
+            emptyFab.startAnimation(fab_close);
+
             chartFab.setClickable(false);
+            emptyFab.setClickable(false);
             isFabOpen= false;
             Log.d("Ramasamy", "close");
         }
@@ -197,6 +204,9 @@ public class MainActivity extends AppCompatActivity
         {
             mainFab.startAnimation(rotate_forward);
             chartFab.startAnimation(fab_open);
+            emptyFab.startAnimation(fab_open);
+
+            emptyFab.setClickable(true);
             chartFab.setClickable(true);
             isFabOpen = true;
             Log.d("Ramasamy", "open");
