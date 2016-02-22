@@ -98,6 +98,12 @@ public class SecondActivity extends DemoBase implements OnChartValueSelectedList
     }
 
     @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {

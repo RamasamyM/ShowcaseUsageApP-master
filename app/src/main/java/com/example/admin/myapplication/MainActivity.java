@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity
     private NavigationView navigationView;
     private Toolbar toolbar;
     private static final String SHOWCASEVIEW  = "showcase";
-    private Boolean isFabOpen = false;
+    private Boolean isFabOpen = true;
 
 
     @Override
@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity
         mainFab.setOnClickListener(this);
         setFloatingActionButton(mainFab, SHOWCASEVIEW, "Welcome to the MainFAB click me! ");
         chartFab.setOnClickListener(this);
+
         emptyFab.setOnClickListener(this);
 
 
@@ -178,10 +179,12 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.piechart_fab_button:
                 intent = new Intent(this,SecondActivity.class);
+                setFloatingActionButton(chartFab, SHOWCASEVIEW, "Welcome to the pieChart click me! ");
                 Log.i(TAG, "pie chart activity call ");
                 break;
             case R.id.empty_fab_button:
                 intent= new Intent(this, SipActivity.class);
+                setFloatingActionButton(emptyFab, SHOWCASEVIEW, "Welcome to the cardView click me!");
             default:
                 break;
         }
