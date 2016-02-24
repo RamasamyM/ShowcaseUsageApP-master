@@ -52,35 +52,23 @@ public class SecondActivity extends DemoBase implements OnChartValueSelectedList
 
         typeFace = Typeface.createFromAsset(getAssets(), "OpenSans-Regular.ttf");
         pieChart.setCenterTextTypeface(Typeface.createFromAsset(getAssets(), "OpenSans-Light.ttf"));
-
-
-
         pieChart.setCenterText(generateCenterSpannableText());
-
         pieChart.setDrawHoleEnabled(true);
         pieChart.setHoleColorTransparent(true);
-
         pieChart.setTransparentCircleColor(Color.WHITE);
         pieChart.setTransparentCircleAlpha(110);
-
         pieChart.setHoleRadius(58f);
         pieChart.setTransparentCircleRadius(61f);
-
         pieChart.setDrawCenterText(true);
-
         pieChart.setRotationAngle(0);
         // enable rotation of the chart by touch
         pieChart.setRotationEnabled(true);
         pieChart.setHighlightPerTapEnabled(true);
-
         // pieChart.setUnit(" €");
         // pieChart.setDrawUnitsInChart(true);
-
         // add a selection listener
         pieChart.setOnChartValueSelectedListener(this);
-
         setData(3, 100);
-
         pieChart.animateY(1400, Easing.EasingOption.EaseInOutQuad);
         // pieChart.spin(2000, 0, 360);
 

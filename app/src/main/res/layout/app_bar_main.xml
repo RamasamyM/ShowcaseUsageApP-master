@@ -21,6 +21,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
+
   <!--  <include layout="@layout/content_main" />-->
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/empty_fab_button"
@@ -36,7 +37,7 @@
         android:src="@drawable/hand" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/piechart_fab_button"
+        android:id="@+id/pie_chart_fab_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="90dp"
