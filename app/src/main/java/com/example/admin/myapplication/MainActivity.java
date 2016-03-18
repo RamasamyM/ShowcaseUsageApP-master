@@ -19,23 +19,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-
-import com.github.amlcurran.showcaseview.ShowcaseView;
-import com.github.amlcurran.showcaseview.targets.ViewTarget;
+import com.google.android.gms.analytics.Tracker;
 
 import co.mobiwise.materialintro.shape.Focus;
 import co.mobiwise.materialintro.shape.FocusGravity;
 
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     private static final String TAG = "Mainactivity";
-
-
     private static final String FAB1 = "action_one";
     private static final String FAB2 = "action_two";
     private static final String FAB3 = "action_three";
-    private ShowcaseView showcaseView;
-    private int counter = 0;
     private FloatingActionButton mainFab, chartFab , emptyFab ;
     private Animation fab_open, fab_close, rotate_forward, rotate_backward;
     private NavigationView navigationView;
@@ -43,15 +38,21 @@ public class MainActivity extends AppCompatActivity
     private static final String SHOWCASEVIEW  = "showcase";
     private Boolean isFabOpen = true;
     RecyclerView recyclerView;
-    private static final  String text = null;
-    private static  final View view = null;
-    private static final String usageId = null;
-    CustomClassView customClassView = null;
+    private Tracker  mTracker;
+    private String name= null;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -59,17 +60,18 @@ public class MainActivity extends AppCompatActivity
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mainFab = (FloatingActionButton) findViewById(R.id.main_fab_button);
         chartFab = (FloatingActionButton) findViewById(R.id.pie_chart_fab_button);
-   //     chartFab.setVisibility(View.GONE);
+        //     chartFab.setVisibility(View.GONE);
         emptyFab= (FloatingActionButton)findViewById(R.id.empty_fab_button);
-   //     emptyFab.setVisibility(View.GONE);
+        //     emptyFab.setVisibility(View.GONE);
         mainFab.setOnClickListener(this);
+        setFloatingActionButton(mainFab, SHOWCASEVIEW,"Welcome to the mainFab click me!");
         chartFab.setOnClickListener(this);
         emptyFab.setOnClickListener(this);
-        setFloatingActionButton(mainFab, SHOWCASEVIEW,"Welcome to the mainFab click me!");
-
         fab_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
         fab_close = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close);
         rotate_forward = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_forward);
+        /*setFloatingActionButton(this.chartFab, SHOWCASEVIEW,"Welcome to the chartFab click me!");
+        setFloatingActionButton(this.emptyFab, SHOWCASEVIEW,"Welcome to the chartFab click me!");*/
         rotate_backward = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_backward);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -107,8 +109,10 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
         if (id == R.id.menu_item1) {
+
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -131,16 +135,10 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-   /*@Override
-    public void onUserClicked(String viewId) {
-        if(viewId == FAB1)
-            setFloatingActionButton(chartFab,FAB2,"second FAB Button");
-        if(viewId == FAB2)
-            setFloatingActionButton(emptyFab,FAB3,"third FAB Button");
-    }*/
 
     public  void setFloatingActionButton(FloatingActionButton view, String usageId, String text)
     {
+
         new CustomClassView.Builder(this)
                 .enableDotAnimation(true)
                 .setFocusGravity(FocusGravity.CENTER)
@@ -153,6 +151,7 @@ public class MainActivity extends AppCompatActivity
                 .setUsageId(usageId) //THIS SHOULD BE UNIQUE ID
                 .show();
     }
+
     private void setToolbar(View view, String usageId, String text)
     {
         new CustomClassView.Builder(this)
@@ -168,22 +167,19 @@ public class MainActivity extends AppCompatActivity
                 .show();
     }
     @Override
-    public void onClick(View v) {
+    public void onClick(View v)
+    {
         int id =v.getId();
-
         Intent intent = null;
         switch (id) {
             case R.id.main_fab_button:
                 animateFAB();
-               /* setFloatingActionButton(chartFab, SHOWCASEVIEW,"Welcome to the mainFab click me!");
-                setFloatingActionButton(emptyFab, SHOWCASEVIEW,"Welcome to the mainFab click me!");*/
                 break;
             case R.id.pie_chart_fab_button:
                 intent = new Intent(this,SecondActivity.class);
                 Log.i(TAG, "pie chart activity call");
                 break;
             case R.id.empty_fab_button:
-
                 intent= new Intent(this, SipActivity.class);
                 Log.i(TAG, "empty chart activity call");
             default:
@@ -193,10 +189,10 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
         }
     }
-    public void animateFAB() {
-
-        if (isFabOpen) {
-
+    public void animateFAB()
+    {
+        if (isFabOpen)
+        {
             mainFab.startAnimation(rotate_backward);
             chartFab.startAnimation(fab_close);
             emptyFab.startAnimation(fab_close);
@@ -210,39 +206,48 @@ public class MainActivity extends AppCompatActivity
             mainFab.startAnimation(rotate_forward);
             chartFab.startAnimation(fab_open);
             emptyFab.startAnimation(fab_open);
-
-            if(!getDefaults("shown",getApplicationContext())){
-
+            if(!getDefaults("shown",getApplicationContext()))
+            {
                 if(chartFab != null)
                 {
-                    setFloatingActionButton(chartFab, SHOWCASEVIEW,"Welcome to the mainFab click me!");
+                   /* chartFab.setOnClickListener(this);
+                      setFloatingActionButton(chartFab, SHOWCASEVIEW,"Welcome to the chartFab click me!");*/
                 }
-                if(emptyFab != null)
+                if(emptyFab!= null)
                 {
-                    new ShowcaseView.Builder(this)
+                   /* new ShowcaseView.Builder(this)
                             .setTarget(new ViewTarget(findViewById(R.id.empty_fab_button)))
-                            .setContentText("welcome to the chartFab action")
+                            .setContentText("welcome to the cardFAB action")
                             .hideOnTouchOutside()
+                            .useDecorViewAsParent()
                             .build();
+                    System.out.println("floating button for  emptyFab");*/
                 }
                 setDefaults("shown",true,getApplicationContext());
             }
-            setFloatingActionButton(emptyFab, SHOWCASEVIEW,"Welcome to the mainFab click me!");
             emptyFab.setClickable(true);
             chartFab.setClickable(true);
             isFabOpen = true;
             Log.d("Ramasamy", "open");
         }
     }
-    private void setDefaults(String key, boolean value, Context context) {
+    private void setDefaults(String key, boolean value, Context context)
+    {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean(key, value);
         editor.commit();
     }
-    private boolean getDefaults(String key, Context context) {
+    private boolean getDefaults(String key, Context context)
+    {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         return preferences.getBoolean(key, false);
     }
+    @Override
+    protected void onResume()
+    {
 
+        super.onResume();
+
+    }
 }

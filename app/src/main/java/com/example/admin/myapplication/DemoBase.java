@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentActivity;
 
 public abstract class DemoBase extends FragmentActivity {
 
+
     protected String[] mParties = new String[] {
             "Equity/Growth Funds", "Debt/Income Funds ", "Balanced Funds ", "Money Market/ Liquid Funds", "Gilt Funds"
     };

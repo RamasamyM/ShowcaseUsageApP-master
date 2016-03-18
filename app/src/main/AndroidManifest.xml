@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.admin.myapplication">
 
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <application
         android:allowBackup="true"
         android:icon="@drawable/invest"
@@ -14,12 +17,19 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".SecondActivity"></activity>
         <activity android:name=".SipActivity"></activity>
+        <application android:name=".AnalyticsApplication"></application>
     </application>
-
+    <receiver android:name="com.mobileapptracker.Tracker">
+        <intent-filter>
+            <action android:name="com.android.vending.INSTALL_REFERRER" />
+        </intent-filter>
+    </receiver>
+    <!-- meta-data only needed here if not using Gradle to include the GPS lib -->
+    <meta-data android:name="com.google.android.gms.version"
+        android:value="@integer/google_play_services_version" />
 </manifest>

@@ -27,14 +27,17 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.gms.analytics.Tracker;
 
 import java.util.ArrayList;
 
 
 public class SecondActivity extends DemoBase implements OnChartValueSelectedListener {
 
+    private static final String TAG = "second activity";
     private PieChart pieChart;
     private Typeface typeFace;
+    private Tracker mTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +52,6 @@ public class SecondActivity extends DemoBase implements OnChartValueSelectedList
         pieChart.setExtraOffsets(5, 10, 5, 5);
 
         pieChart.setDragDecelerationFrictionCoef(0.95f);
-
         typeFace = Typeface.createFromAsset(getAssets(), "OpenSans-Regular.ttf");
         pieChart.setCenterTextTypeface(Typeface.createFromAsset(getAssets(), "OpenSans-Light.ttf"));
         pieChart.setCenterText(generateCenterSpannableText());
@@ -86,8 +88,7 @@ public class SecondActivity extends DemoBase implements OnChartValueSelectedList
     }
 
     @Override
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         super.onBackPressed();
     }
 
@@ -203,7 +204,6 @@ public class SecondActivity extends DemoBase implements OnChartValueSelectedList
     }
 
     private SpannableString generateCenterSpannableText() {
-
         SpannableString s = new SpannableString("PerformanceActivity \n modified by Ramasamy");
         s.setSpan(new RelativeSizeSpan(1.7f), 0, 14, 0);
         s.setSpan(new StyleSpan(Typeface.NORMAL), 14, s.length() - 15, 0);
@@ -228,4 +228,6 @@ public class SecondActivity extends DemoBase implements OnChartValueSelectedList
     public void onNothingSelected() {
         Log.i("PieChart", "nothing selected");
     }
+
+
 }
